@@ -1,5 +1,6 @@
 package com.tn.quiz.service.impl;
 
+import com.tn.quiz.helper.UserFoundException;
 import com.tn.quiz.model.User;
 import com.tn.quiz.model.UserRole;
 import com.tn.quiz.repo.RoleRepository;
@@ -23,7 +24,7 @@ public class UserServiceImpl implements UserService {
         User usr =this.userRepository.findByUsername(user.getUsername());
         if(usr!=null){
             System.out.println("User Already Exists !!");
-            throw new Exception("User already present !!");
+            throw new UserFoundException("User already present !!");
         }
         else{
             for(UserRole ur:userRoles){
