@@ -68,12 +68,12 @@ public class Quiz {
         this.noOfQuestion = noOfQuestion;
     }
 
-    public boolean isActive() {
+    public boolean getIsActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
-        isActive = active;
+    public void setIsActive(boolean isActive) {
+        isActive = isActive;
     }
 
     public Category getCategory() {

@@ -63,4 +63,15 @@ public class QuestionController {
     public void deleteQuestion(@PathVariable("quesId") Long quesId){
         this.questionService.deleteQuestion(quesId);
     }
+
+    @GetMapping("/quiz/question/{qid}")
+    public ResponseEntity<?> getAllQuestionOfQuiz(@PathVariable("qid") Long qid){
+        Quiz quiz = this.quizService.getQuiz(qid);
+        Set<Question> questions = quiz.getQuestions();
+        List list = new ArrayList<>(questions);
+        return ResponseEntity.ok(list);
+
+
+    }
+
 }
