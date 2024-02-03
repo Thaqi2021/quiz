@@ -2,6 +2,7 @@ package com.tn.quiz.service;
 
 import com.tn.quiz.model.exam.Quiz;
 
+import java.util.List;
 import java.util.Set;
 
 public interface QuizService {
@@ -13,4 +14,5 @@ public interface QuizService {
 
     public void deleteQuiz(Long quizId);
 
+    public List<Quiz> getQuizzesOfCategory(Long cid);
 }

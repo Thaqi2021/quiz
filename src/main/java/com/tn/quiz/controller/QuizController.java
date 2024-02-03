@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/quiz")
 @CrossOrigin("*")
@@ -40,5 +42,10 @@ public class QuizController {
     public void deleteQuiz(@PathVariable("quizId") Long quizId){
         System.out.println("delete Quiz");
         this.quizService.deleteQuiz(quizId);
+    }
+    @GetMapping("/category/{cid}")
+    public ResponseEntity<?> getCategoryofQuiz(@PathVariable("cid") Long cid){
+         List<Quiz> cat =this.quizService.getQuizzesOfCategory(cid);
+         return  ResponseEntity.ok(cat);
     }
 }

@@ -1,5 +1,6 @@
 package com.tn.quiz.service.impl;
 
+import com.tn.quiz.model.exam.Category;
 import com.tn.quiz.model.exam.Quiz;
 import com.tn.quiz.repo.QuizRepository;
 import com.tn.quiz.service.QuizService;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -38,5 +40,12 @@ public class QuizServiceImpl implements QuizService {
     @Override
     public void deleteQuiz(Long quizId) {
             quizRepo.deleteById(quizId);
+    }
+
+    @Override
+    public List<Quiz> getQuizzesOfCategory(Long cid) {
+        Category category =  new Category();
+        category.setCid(cid);
+        return quizRepo.findByCategory(category);
     }
 }
