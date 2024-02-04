@@ -73,7 +73,7 @@ public class Quiz {
     }
 
     public void setIsActive(boolean isActive) {
-        isActive = isActive;
+        this.isActive = isActive;
     }
 
     public Category getCategory() {
