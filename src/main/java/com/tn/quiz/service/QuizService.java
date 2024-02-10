@@ -1,5 +1,6 @@
 package com.tn.quiz.service;
 
+import com.tn.quiz.model.exam.Category;
 import com.tn.quiz.model.exam.Quiz;
 
 import java.util.List;
@@ -15,4 +16,7 @@ public interface QuizService {
     public void deleteQuiz(Long quizId);
 
     public List<Quiz> getQuizzesOfCategory(Long cid);
+
+    public List<Quiz> getActiveQuiz();
+    public List<Quiz> getActiveQuizInCategory(Category cat);
 }

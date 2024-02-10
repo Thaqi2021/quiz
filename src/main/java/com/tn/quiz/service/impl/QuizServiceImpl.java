@@ -48,4 +48,14 @@ public class QuizServiceImpl implements QuizService {
         category.setCid(cid);
         return quizRepo.findByCategory(category);
     }
+
+    @Override
+    public List<Quiz> getActiveQuiz() {
+        return quizRepo.findByIsActive(true);
+    }
+
+    @Override
+    public List<Quiz> getActiveQuizInCategory(Category cat) {
+        return quizRepo.findByCategoryAndIsActive(cat,true);
+    }
 }
