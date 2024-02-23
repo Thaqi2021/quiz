@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -45,4 +46,13 @@ public class QuestionServiceImpl implements QuestionService {
     public void deleteQuestion(Long quesId) {
         this.questionRepository.deleteById(quesId);
     }
+
+//    @Override
+//    public List getQuestionFields(Long quizid) {
+//        List<Object[]> obj = questionRepository.findQuestionFields(quizid);
+//       // Question[] questions = (Question[]) obj.get(0);
+//
+//        return List.of(obj.get(0));
+//
+//    }
 }

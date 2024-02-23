@@ -4,6 +4,7 @@ import com.tn.quiz.model.exam.Category;
 import com.tn.quiz.model.exam.Question;
 import com.tn.quiz.model.exam.Quiz;
 
+import java.util.List;
 import java.util.Set;
 
 public interface QuestionService {
@@ -16,5 +17,8 @@ public interface QuestionService {
     public Set<Question> getQuestionByQuiz(Quiz quiz);
 
     public void deleteQuestion(Long quesId);
+
+    //public List<Question> getQuestionFields(Long quizId);
+
 
 }

@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
-
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.ArrayList;
+import java.util.Map;
 @RestController
 @RequestMapping("/question")
 @CrossOrigin("*")
@@ -48,7 +51,10 @@ public class QuestionController {
 //        return ResponseEntity.ok(questionByQuiz);
         Quiz quiz = this.quizService.getQuiz(qid);
         Set<Question> questions = quiz.getQuestions();
-        List list = new ArrayList<>(questions);
+        List<Question> list = new ArrayList<>(questions);
+        list.forEach((q)->{
+            q.setAnswer("");
+        });
         Collections.shuffle(list);
         if(list.size()> quiz.getNoOfQuestion()){
             list = list.subList(0, quiz.getNoOfQuestion());
@@ -70,8 +76,38 @@ public class QuestionController {
         Set<Question> questions = quiz.getQuestions();
         List list = new ArrayList<>(questions);
         return ResponseEntity.ok(list);
-
-
     }
 
+    @PostMapping("/eval-answer")
+    public  ResponseEntity<?> getAllQuestionWithAnswer(@RequestBody List<Question> question){
+       Integer correctAns=0;
+       Double markGot=0.0;
+       Integer attempedQuestion=0;
+       Double singleMark =question.get(0).getQuiz().getMaxMark()/question.get(0).getQuiz().getNoOfQuestion();
+        if(question!=null){
+            for (Question ques:question) {
+               Question q= this.questionService.getQuestionById(ques.getQuesId());
+               System.out.println(q.getAnswer()+"...........");
+               if(q.getAnswer().equals(ques.getGivenAnswer())){
+                   correctAns++;
+                   markGot=markGot+singleMark;
+               }
+                if (ques.getGivenAnswer()!=null || !ques.getGivenAnswer().trim().equals("")) {
+                    attempedQuestion++;
+                }
+
+            }
+            Map map = Map.of("correctAns",correctAns,"markGot",markGot,"attempedQuestion",attempedQuestion);
+            return ResponseEntity.ok(map);
+
+        }else {
+            return ResponseEntity.ok("No");
+        }
+    }
+//    @GetMapping("/onlyQuestion/{qid}")
+//    public ResponseEntity<?> getOnlyQuestion(@PathVariable("qid") Long qid){
+//        System.out.println("ok test.....................");
+//        List<Question> questions =this.questionService.getQuestionFields(qid);
+//        return ResponseEntity.ok(questions);
+//    }
 }
